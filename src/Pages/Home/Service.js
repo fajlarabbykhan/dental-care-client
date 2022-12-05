@@ -10,7 +10,9 @@ const Service = ({ service }) => {
         <h2 className="card-title">{service.name}</h2>
         <p>{service.description}</p>
         <div className="card-actions">
-          <button className="btn btn-primary">Buy Now</button>
+          <button className="btn btn-primary  text-white font-bold bg-gradient-to-r from-[#5651e5] to-[#709dff] ">
+            Buy Now
+          </button>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ const Information = () => {
       <InformtionCard
         img={phone}
         title="Contact Us"
-        backg="   bg-gradient-to-r from-secondary to-primary"
+        backg="   bg-gradient-to-r from-primary to-secondary"
       ></InformtionCard>
     </div>
   );
