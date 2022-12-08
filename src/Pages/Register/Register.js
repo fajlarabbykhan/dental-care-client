@@ -1,49 +1,80 @@
 import React from "react";
 import {
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-const Login = () => {
+import { Link, useNavigate } from "react-router-dom";
+const Register = () => {
+  const [createUserWithEmailAndPassword, eUser, eLoading, eError] =
+    useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  const [signInWithEmailAndPassword, eUser, eLoading, eError] =
-    useSignInWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-
   const navigate = useNavigate();
-  const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
-
-  if (gLoading || eLoading) {
+  if (gLoading || eLoading | updating) {
     return <Loading></Loading>;
   }
   let signInError;
-  if (gError || eError) {
+  if (gError || eError || updateError) {
     signInError = (
-      <p className="text-red-500">{eError?.message || gError?.message}</p>
+      <p className="text-red-500">
+        {eError?.message || gError?.message || updateError?.message}
+      </p>
     );
   }
   if (gUser || eUser) {
     console.log(gUser || eUser);
-    navigate(from, { replace: true });
   }
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    // console.log(data);
+    await updateProfile({ displayName: data.name });
+    navigate("/");
+    console.log("Name update done");
   };
   return (
     <div className="px-12 flex justify-center items-center h-screen">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="text-center text-2xl font-bold">Login</h2>
+          <h2 className="text-center text-2xl font-bold">Register</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="input input-bordered w-full max-w-xs"
+                {...register("name", {
+                  required: {
+                    value: true,
+                    message: "Name is required",
+                  },
+                })}
+              />
+              <label className="label">
+                {errors.name?.type === "required" && (
+                  <p role="alert" className="text-red-500">
+                    {errors.name.message}
+                  </p>
+                )}
+                {errors.name?.type === "pattern" && (
+                  <p role="alert" className="text-red-500">
+                    {errors.name.message}
+                  </p>
+                )}
+              </label>
+            </div>
+
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -76,6 +107,7 @@ const Login = () => {
                 )}
               </label>
             </div>
+
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -111,14 +143,14 @@ const Login = () => {
             {signInError}
             <input
               type="submit"
-              value="Login"
+              value="Register"
               className="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-[#5651e5] to-[#709dff] w-full max-w-xs"
             />
           </form>
           <p className="mt-2">
-            Don't have a account -{" "}
-            <Link to="/register" className="text-red-500">
-              Register
+            Already have a account -{" "}
+            <Link to="/login" className="text-blue-500">
+              Login
             </Link>{" "}
           </p>
           <div className="divider">OR</div>
@@ -134,4 +166,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
