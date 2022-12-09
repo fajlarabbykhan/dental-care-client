@@ -10,6 +10,8 @@ import Review from "./Pages/Review/Review";
 import Contact from "./Pages/Contact/Contact";
 import Register from "./Pages/Register/Register";
 import RequireAuth from "./Pages/Login/RequireAuth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // border-none px-5 py-2 bg-[ #0071c2] text-white font-bold rounded cursor-pointer bg-gradient-to-r from-[#5651e5] to-[#709dff]
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
         <Route path="/login" element={<Login></Login>} />
         <Route path="/register" element={<Register></Register>} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
