@@ -8,6 +8,7 @@ import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
 import { Link, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 const Register = () => {
   const [createUserWithEmailAndPassword, eUser, eLoading, eError] =
     useCreateUserWithEmailAndPassword(auth);
@@ -18,6 +19,9 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const [token] = useToken(gUser || eUser);
+
   const navigate = useNavigate();
   if (gLoading || eLoading | updating) {
     return <Loading></Loading>;
@@ -30,15 +34,16 @@ const Register = () => {
       </p>
     );
   }
-  if (gUser || eUser) {
-    console.log(gUser || eUser);
+  if (token) {
+    // console.log(gUser || eUser);
+    navigate("/appoinment");
   }
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     // console.log(data);
     await updateProfile({ displayName: data.name });
-    navigate("/");
-    console.log("Name update done");
+    // navigate("/");
+    // console.log("Name update done");
   };
   return (
     <div className="px-12 flex justify-center items-center h-screen">
