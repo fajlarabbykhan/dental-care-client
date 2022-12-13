@@ -42,7 +42,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
+    // console.log(data);
   };
   return (
     <div className="px-12 flex justify-center items-center h-screen">

@@ -16,6 +16,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointments from "./Pages/Dashboard/MyAppointments";
 import MyReview from "./Pages/Dashboard/MyReview";
 import MyHistory from "./Pages/Dashboard/MyHistory";
+import Users from "./Pages/Dashboard/Users";
+import RequireAdmin from "./Pages/Login/RequireAdmin";
 // border-none px-5 py-2 bg-[ #0071c2] text-white font-bold rounded cursor-pointer bg-gradient-to-r from-[#5651e5] to-[#709dff]
 function App() {
   return (
@@ -42,6 +44,15 @@ function App() {
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path="myreview" element={<MyReview></MyReview>}></Route>
           <Route path="myhistory" element={<MyHistory></MyHistory>}></Route>
+          <Route
+            path="users"
+            element={
+              <RequireAdmin>
+                {" "}
+                <Users></Users>{" "}
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
         <Route path="/review" element={<Review></Review>} />
         <Route path="/contact" element={<Contact></Contact>} />
