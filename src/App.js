@@ -20,6 +20,7 @@ import Users from "./Pages/Dashboard/Users";
 import RequireAdmin from "./Pages/Login/RequireAdmin";
 import AddDoctor from "./Pages/Dashboard/AddDoctor";
 import ManageDoctors from "./Pages/Dashboard/ManageDoctors";
+import Payment from "./Pages/Dashboard/Payment";
 // border-none px-5 py-2 bg-[ #0071c2] text-white font-bold rounded cursor-pointer bg-gradient-to-r from-[#5651e5] to-[#709dff]
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path="myreview" element={<MyReview></MyReview>}></Route>
           <Route path="myhistory" element={<MyHistory></MyHistory>}></Route>
+          <Route path="payment/:id" element={<Payment></Payment>}></Route>
           <Route
             path="users"
             element={
@@ -64,6 +66,7 @@ function App() {
               </RequireAdmin>
             }
           ></Route>
+
           <Route
             path="manageDoctors"
             element={

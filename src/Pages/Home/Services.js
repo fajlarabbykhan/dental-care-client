@@ -9,19 +9,22 @@ const Services = () => {
     {
       _id: 1,
       name: "Floride Treatment",
-      description: "I am good boy",
+      description:
+        "Fluoride treatments are typically professional treatments containing a high concentration of fluoride that a dentist or hygienist will apply to a person's teeth to improve health and reduce the risk of cavities",
       img: fluride,
     },
     {
       _id: 2,
       name: "Cavity Treatment",
-      description: "I am bad boy",
+      description:
+        "Fillings, also called restorations, are the main treatment option when decay has progressed beyond the earliest stage.",
       img: cavity,
     },
     {
       _id: 3,
       name: "Whitening Treatment",
-      description: "I am good boy",
+      description:
+        "eeth whitening involves bleaching your teeth to make them lighter. It can't make your teeth brilliant white, but it can lighten the existing colour by several shades.",
       img: whiting,
     },
   ];
