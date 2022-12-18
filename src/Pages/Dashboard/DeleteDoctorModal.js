@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const DeleteDoctorModal = ({ removeDoctor, refetch, setremoveDoctor }) => {
   const { name, email } = removeDoctor;
   const deleteDoctor = () => {
-    fetch(`http://localhost:5000/doctor/${email}`, {
+    fetch(`https://dentalcareserver.onrender.com/doctor/${email}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

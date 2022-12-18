@@ -8,7 +8,7 @@ const useAdmin = (user) => {
     const email = user?.email;
     // console.log("Emsil", email);
     if (email) {
-      fetch(`http://localhost:5000/admin/${user.email}`, {
+      fetch(`https://dentalcareserver.onrender.com/admin/${user.email}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

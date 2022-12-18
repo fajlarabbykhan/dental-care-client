@@ -8,7 +8,7 @@ const useToken = (user) => {
     const currentUser = { email: email };
     // console.log(currentUser);
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
+      fetch(`https://dentalcareserver.onrender.com/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

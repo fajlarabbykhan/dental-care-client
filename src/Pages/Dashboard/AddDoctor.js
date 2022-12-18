@@ -14,7 +14,9 @@ const AddDoctor = () => {
   } = useForm();
 
   const { data: services, isLoading } = useQuery("services", () =>
-    fetch("http://localhost:5000/service").then((res) => res.json())
+    fetch("https://dentalcareserver.onrender.com/service").then((res) =>
+      res.json()
+    )
   );
   const imageApi = "4494498d5b5648221b45ca160d56dd7f";
   const onSubmit = async (data) => {
@@ -41,7 +43,7 @@ const AddDoctor = () => {
           };
           //   console.log("Doctor Info", doctor);
           // post doctor data to data base
-          fetch("http://localhost:5000/doctor", {
+          fetch("https://dentalcareserver.onrender.com/doctor", {
             method: "POST",
             headers: {
               "content-type": "application/json",
